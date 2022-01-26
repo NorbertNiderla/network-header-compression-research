@@ -1,4 +1,4 @@
-source("./scripts/to_refactor/own_bit_library.R")
+source("./scripts/to_refactor/bit_operations.R")
 
 get_coap_data <- function(){
         n = scan("./source/coap_dataset.txt", what=double())

@@ -1,5 +1,5 @@
 source("./scripts/coap_data.R")
-source("./scripts/to_refactor/own_bit_library.R")
+source("./scripts/tools/bit_operations.R")
 library(ggpubr)
 
 get_coap_position_probability_model_2 <- function(){

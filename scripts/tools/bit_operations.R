@@ -1,5 +1,4 @@
 library(bit)
-library(openssl)
 
 int_to_bit <-function(int, n_bits){
             return(as.bit(tail(rev(as.integer(intToBits(int))),n_bits)))      
@@ -40,6 +39,7 @@ zeros_volume <- function(bit_stream){
    }
    return(zr/size)
 }
+
 transpose_bit_matrix <- function(data, bit_width){
    
    mat = matrix(ncol=bit_width, nrow = length(data))

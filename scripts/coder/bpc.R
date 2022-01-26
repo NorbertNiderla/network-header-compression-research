@@ -1,4 +1,4 @@
-source("./own_bit_library.R")
+source("./scripts/tools/bit_operations.R")
 
 #data is array of 8 8-bit symbols
 bpc_encode <- function(data, bit_width, debug = FALSE){
