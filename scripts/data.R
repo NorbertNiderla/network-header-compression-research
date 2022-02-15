@@ -1,7 +1,7 @@
-source("./scripts/to_refactor/bit_operations.R")
+source("./scripts/tools/bit_operations.R")
 
-get_coap_data <- function(){
-        n = scan("./source/coap_dataset.txt", what=double())
+get_data <- function(filepath){
+        n = scan(filepath, what=double())
         header <- list()
         payload <- list()
         i <- 1
@@ -38,19 +38,25 @@ get_coap_data <- function(){
         return(list(header_bit, payload_bit))
 }
 
-get_coap_header <- function(){
-        n = scan("./source/ring_coap_raw_data.txt", what=double())
-        header <- list()
-        i <- 1
-        for(x in seq(from=1,by=4,to=length(n))){
-                header[[i]] <- n[x:(x+3)]
-                i <- i + 1
+get_header <- function(filepath){
+        con = file(filepath, "r")
+        n <- list()
+        k <- 1
+        while(TRUE){
+                line = readLines(con, n = 1)
+                if(length(line) == 0){
+                        break
+                }
+                n[[k]] <- as.numeric(unlist(strsplit(line, " ")))
+                k <- k + 1
         }
+        close(con)
         
         header_bit <- list()
-        for(x in 1:length(header)){
-                header_bit[[x]] <- as.double(int_vector_to_bit(header[[x]], 8))
+        for(x in 1:length(n)){
+                header_bit[[x]] <- as.double(int_vector_to_bit(n[[x]], 8))
         }
         
         return(header_bit)
 }
+

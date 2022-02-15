@@ -1,0 +1,29 @@
+---
+title: "Probability Models Comparison"
+output: html_notebook
+---
+
+```{r}
+source("./scripts/probability_model.R")
+source("./scripts/entropy.R")
+probability_models_entropy <- list("positional_1-bit" = get_total_entropy(get_coap_position_probability_model_2()) / 32,
+                                   "positional_2-bit" = get_total_entropy(get_coap_position_probability_model_4()) / 32,
+                                   "positional_4-bit" = get_total_entropy(get_coap_position_probability_model_16())/ 32,
+                                   "positional_8-bit" = get_total_entropy(get_coap_position_probability_model_256()) / 32,
+                                   "markov_1" = get_markov_chain_entropy(first_order_markov()),
+                                   "markov_2" = get_markov_chain_entropy(second_order_markov()),
+                                   "markov_3" = get_markov_chain_entropy(third_order_markov()),
+                                   "markov_4" = get_markov_chain_entropy(fourth_order_markov()),
+                                   "markov_5" = get_markov_chain_entropy(fifth_order_markov()),
+                                   "standard_1-bit" = get_standard_model_entropy(standard_model(1)),
+                                   "standard_2-bit" = get_standard_model_entropy(standard_model(2)),
+                                   "standard_4-bit" = get_standard_model_entropy(standard_model(4)),
+                                   "standard_8-bit" = get_standard_model_entropy(standard_model(8)))
+
+```
+
+```{r}
+library(Hmisc)
+list.tree(probability_models_entropy, maxcomp=20)
+```
+
